@@ -28,7 +28,7 @@ def make_folders():
         next(coursereader)
         for row in coursereader:
             folname = row[0].title()
-            path = os.path.join(pwd,"Course Materials", folname)
+            path = os.path.join(pwd,"Course_Materials", folname)
             try: 
                 os.makedirs(path)
             except OSError:
@@ -44,7 +44,7 @@ def fetch_materials():
     browser = login_to_lms()
     for dict in data:
         try:
-            path = os.path.join(pwd ,"Course Materials",dict['coursename'].title())
+            path = os.path.join(pwd ,"Course_Materials",dict['coursename'].title())
             os.chdir(path)
         except OSError:
             make_folders()
@@ -65,8 +65,13 @@ def fetch_materials():
                     fname = dict['materialtext'][i] + '.pdf'
                 file_path = os.path.join(path,fname)
                 print fname + ' is Downloaded'
-                with open(file_path, "w") as file:
-                    file.write(request.content)
+                try:
+                    with open(file_path, "w") as file:
+                        file.write(request.content)
+                except IOError:
+                    file_path = os.path.join(path[:-1],fname)
+                    with open(file_path, "w") as file:
+                        file.write(request.content)
                     continue
             else:
                 url = dict['materialurl'][i]
@@ -81,6 +86,11 @@ def fetch_materials():
                         fname = fname + '.pdf'
                 file_path = os.path.join(path,fname)
                 print fname + ' is Downloaded'
-                with open(file_path, "wb") as file:
-                    file.write(request.content)
+                try:
+                    with open(file_path, "w") as file:
+                        file.write(request.content)
+                except IOError:
+                    file_path = os.path.join(path[:-1],fname)
+                    with open(file_path, "w") as file:
+                        file.write(request.content)
 fetch_materials()

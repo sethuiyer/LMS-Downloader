@@ -28,7 +28,7 @@ def make_folders():
         next(coursereader)
         for row in coursereader:
             folname = row[0].title()
-            path = pwd + '/' + folname
+            path = os.path.join(pwd,"Course Materials", folname)
             try: 
                 os.makedirs(path)
             except OSError:
@@ -44,7 +44,7 @@ def fetch_materials():
     browser = login_to_lms()
     for dict in data:
         try:
-            path = pwd + '/' + dict['coursename'].title()
+            path = os.path.join(pwd ,"Course Materials",dict['coursename'].title())
             os.chdir(path)
         except OSError:
             make_folders()

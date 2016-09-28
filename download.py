@@ -63,7 +63,7 @@ def fetch_materials():
                     fname = dict['materialtext'][i]
                 else:
                     fname = dict['materialtext'][i] + '.pdf'
-                file_path = path +' /' + fname
+                file_path = os.path.join(path,fname)
                 print fname + ' is Downloaded'
                 with open(file_path, "w") as file:
                     file.write(request.content)
@@ -79,7 +79,7 @@ def fetch_materials():
                     fname = dict['materialtext'][i]
                     if '.' not in fname:
                         fname = fname + '.pdf'
-                file_path = path + '/' + fname
+                file_path = os.path.join(path,fname)
                 print fname + ' is Downloaded'
                 with open(file_path, "wb") as file:
                     file.write(request.content)

@@ -13,5 +13,10 @@ Then run `python download.py` and wait for the script to finish.
 ![attributes](fetch.png)
 ![attributes](download.png)
 
+##Future Features
+* Make a GUI Application using Tkinter
+* Parse Discussion formus as well
+
+
 Please raise issues and pull requests in case of any feature request or issues.
 

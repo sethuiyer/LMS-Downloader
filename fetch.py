@@ -16,6 +16,12 @@ def login_to_lms():
     conf = yaml.load(open('credentials/lms.yml'))
     username = conf['user']['username']
     password = conf['user']['password']
+    if username == 'myusernamehere' and password == 'mypasswordhere':
+        username=raw_input("Enter your LMS username")
+        password = raw_input("Enter Password: ")
+        with open('credentials/lms.yml','w') as f:
+            data = {'user':{'username': username,'password': password}}
+            yaml.dump(data,f,default_flow_style=False)
     form['username'].value = username
     form['password'].value = password
     browser.submit_form(form)
